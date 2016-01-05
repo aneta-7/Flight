@@ -1,0 +1,77 @@
+﻿@model Planes.Models.Flight
+
+@{
+    ViewBag.Tytul = "Szczegóły przelotu";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Przelot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time2)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated || User.IsInRole("Admin") || User.IsInRole("Pracownik"))
+    {
+       @Html.ActionLink("Edytuj", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" }) 
+    }
+    @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-primary" })
+</p>

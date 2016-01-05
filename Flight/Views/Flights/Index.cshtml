@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Planes.Models.Flight>
+
+@{
+    ViewBag.Tytul = "Lista przelotów";
+}
+
+<h2>Lista przelotów</h2>
+@if (User.Identity.IsAuthenticated)
+{
+<p>
+   <a class="btn btn-primary" href="/Flights/Create">Dodaj nowy przelot</a>
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time2)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time2)
+        </td>
+        <td>
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }, new { @class = "btn btn-warning" })
+
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+            {
+                <br />
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
+            }
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+            {
+                <br />
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+            }
+        </td>
+    </tr>
+}
+
+</table>

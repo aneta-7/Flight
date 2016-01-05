@@ -1,0 +1,86 @@
+﻿@model Planes.Models.Flight
+
+@{
+    ViewBag.Tytul = "Usuwanie przelotu";
+}
+
+<h2>Usuwanie przelotu</h2>
+@if(ViewBag.Error == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystąpił błąd podczas usuwania. <br/>
+        Spróbuj ponownie.
+    </div>
+}
+<h3>Czy na pewno chcesz usunąć przelot?</h3>
+<div>
+    <h4>Przelot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time2)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger" onclick="returnconfirm('Czy na pewno chcesz usunąć przelot?')" /> 
+            @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>
