@@ -12,6 +12,8 @@ namespace Flights.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<Flights.Models.ApplicationDbContext>
     {
+
+        
         private List<Plane> plane2;
         public Configuration()
         {
@@ -22,7 +24,7 @@ namespace Flights.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            SeedRoles(context);
+                SeedRoles(context);
             SeedUsers(context);
             SeedPlanes(context);
             SeedFlights(context);
@@ -85,14 +87,13 @@ namespace Flights.Migrations
             {
                 var plane = new Plane()
                 {
-                    ID = i,
                     Name = "Nazwa samolotu" + i.ToString(),
                     Type = "Typ samolotu" + i.ToString()
                 };
                 context.Set<Plane>().AddOrUpdate(plane);
-                plane2.Add(plane);
             }
             context.SaveChanges();
+            plane2 = context.Planes.ToList();
         }
 
 
@@ -103,7 +104,6 @@ namespace Flights.Migrations
             {
                 var flight = new Flight()
                 {
-                    ID = i,
                     Code = "Kod" + i.ToString(),
                     Start = "Warszawa",
                     Date1 = DateTime.Now.AddDays(-i),

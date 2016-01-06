@@ -37,6 +37,7 @@ namespace Planes.Controllers
         }
 
         // GET: Planes/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +48,7 @@ namespace Planes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Name,Type")] Plane plane)
         {
             if (ModelState.IsValid)
@@ -118,6 +120,7 @@ namespace Planes.Controllers
         // POST: Planes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Plane plane = db.Planes.Find(id);

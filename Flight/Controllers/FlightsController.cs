@@ -16,8 +16,10 @@ namespace Planes.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Flights
-        public ActionResult Index()
+        public ActionResult Index( int id)
         {
+          
+
             return View(db.Flights.ToList());
         }
 
@@ -37,9 +39,12 @@ namespace Planes.Controllers
         }
 
         // GET: Flights/Create
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            FlightViewModel model = new FlightViewModel();
+            model.Planes = db.Planes.ToList();
+            return View(model);
         }
 
         // POST: Flights/Create
@@ -47,16 +52,29 @@ namespace Planes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Code,Start,Date1,Time1,Meta,Date2,Time2")] Flight flight)
+        [Authorize]
+        public ActionResult Create([Bind(Include = " Code,Start,Date1,Time1,Meta,Date2,Time2,SelectedPlaneID,Planes")] FlightViewModel flightViewModel)
         {
             if (ModelState.IsValid)
             {
+                Flight flight = new Flight()
+                {
+                  
+                    Code = flightViewModel.Code,
+                    Start = flightViewModel.Start,
+                    Date1 = flightViewModel.Date1,
+                    Time1 = flightViewModel.Time1,
+                    Meta = flightViewModel.Meta,
+                    Date2 = flightViewModel.Date2,
+                    Time2 = flightViewModel.Time2,
+                    Plane = db.Planes.Find(flightViewModel.SelectedPlaneID)
+                };
                 db.Flights.Add(flight);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(flight);
+            return View(flightViewModel);
         }
 
         // GET: Flights/Edit/5
@@ -64,17 +82,28 @@ namespace Planes.Controllers
         public ActionResult Edit(int? id)
         {
             Flight flight = db.Flights.Find(id);
+            FlightViewModel flightViewModel = new FlightViewModel();
+            flightViewModel.Planes = db.Planes.ToList();
+            flightViewModel.ID = flight.ID;
+            flightViewModel.Code = flight.Code;
+            flightViewModel.Start = flight.Start;
+            flightViewModel.Date1 = flight.Date1;
+            flightViewModel.Time1 = flight.Time1;
+            flightViewModel.Meta = flight.Meta;
+            flightViewModel.Date2 = flight.Date2;
+            flightViewModel.Time2 = flight.Time2;
+            flightViewModel.SelectedPlaneID = flight.Plane.ID;
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
            
-            if (flight == null)
+            if (flightViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(flight);
+            return View(flightViewModel);
         }
 
         // POST: Flights/Edit/5
@@ -83,15 +112,25 @@ namespace Planes.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Code,Start,Date1,Time1,Meta,Date2,Time2")] Flight flight)
+        public ActionResult Edit([Bind(Include = "ID,Code,Start,Date1,Time1,Meta,Date2,Time2,SelectedPlaneId, Planes")] FlightViewModel flightViewModel)
         {
+           
             if (ModelState.IsValid)
             {
-                db.Entry(flight).State = EntityState.Modified;
+                Flight flight = db.Flights.Find(flightViewModel.ID);
+                flight.Code = flightViewModel.Code;
+                flight.Start = flightViewModel.Start;
+                flight.Date1 = flightViewModel.Date1;
+                flight.Time1 = flightViewModel.Time1;
+                flight.Meta = flightViewModel.Meta;
+                flight.Date2 = flightViewModel.Date2;
+                flight.Time2 = flightViewModel.Time2;
+                flight.Plane = db.Planes.Find(flightViewModel.SelectedPlaneID);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(flight);
+            return View(flightViewModel);
         }
 
         // GET: Flights/Delete/5
@@ -120,6 +159,7 @@ namespace Planes.Controllers
         // POST: Flights/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Flight flight = db.Flights.Find(id);

@@ -13,8 +13,12 @@
     <div class="col-md-4">
         <h2>Samoloty</h2>
         <p><a class="btn btn-group" href="/Planes">Lista samolotów</a></p>
-        <p><a class="btn btn-group" href="/Planes/Create">Dodaj nowy samolot</a></p>
-
+        @if (User.Identity.IsAuthenticated)
+        {
+           <p>
+                <a class="btn btn-group" href="/Planes/Create">Dodaj nowy samolot</a>
+           </p>
+        }
     </div>
 </div>
 
@@ -24,7 +28,13 @@
         <div class="col-md-4">
             <h2>Przeloty</h2>
             <p><a class="btn btn-group" href="/Flights">Lista przelotów</a></p>
-            <p><a class="btn btn-group" href="/Flights/Create">Dodaj nowy samloto</a></p>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>
+                <a class="btn btn-group" href="/Flights/Create">Dodaj nowy przelot</a>
+            </p>
+        }
         </div>
        
     </div>

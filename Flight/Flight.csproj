@@ -193,9 +193,18 @@
     <Compile Include="Migrations\201601061050214_next.Designer.cs">
       <DependentUpon>201601061050214_next.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601061809232_add_validations.cs" />
+    <Compile Include="Migrations\201601061809232_add_validations.Designer.cs">
+      <DependentUpon>201601061809232_add_validations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601061824367_delete_walidations.cs" />
+    <Compile Include="Migrations\201601061824367_delete_walidations.Designer.cs">
+      <DependentUpon>201601061824367_delete_walidations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\FlightViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Plane.cs" />
@@ -286,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061050214_next.resx">
       <DependentUpon>201601061050214_next.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061809232_add_validations.resx">
+      <DependentUpon>201601061809232_add_validations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061824367_delete_walidations.resx">
+      <DependentUpon>201601061824367_delete_walidations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
