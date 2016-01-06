@@ -20,9 +20,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Type)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Flight)
-        </th>
+      
         <th></th>
     </tr>
 
@@ -33,9 +31,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Flight.Code)
         </td>
         <td>
             @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }, new { @class = "btn btn-warning" })

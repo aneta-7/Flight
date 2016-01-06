@@ -21,8 +21,6 @@ namespace Planes.Models
         [Required]
         public string Type { get; set; }
 
-        [Display(Name = "Przelot")]
-        public virtual Flight Flight { get; set; }
     }
 
 
