@@ -16,7 +16,7 @@ namespace Planes.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Flights
-        public ActionResult Index( int id)
+        public ActionResult Index()
         {
           
 
@@ -53,7 +53,7 @@ namespace Planes.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = " Code,Start,Date1,Time1,Meta,Date2,Time2,SelectedPlaneID,Planes")] FlightViewModel flightViewModel)
+        public ActionResult Create([Bind(Include = "ID, Code,Start,Date1,Time1,Meta,Date2,Time2,SelectedPlaneID,Planes")] FlightViewModel flightViewModel)
         {
             if (ModelState.IsValid)
             {
