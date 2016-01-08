@@ -16,9 +16,19 @@ namespace Planes.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Planes
-        public ActionResult Index()
+        public ActionResult Index(string searchName)
         {
-            return View(db.Planes.ToList());
+            var planes = from p in db.Planes
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                planes = planes.Where(s => s.Name.Contains(searchName));
+            }
+
+            return View(planes);
+
+            //   return View(db.Planes.ToList());
         }
 
         // GET: Planes/Details/5

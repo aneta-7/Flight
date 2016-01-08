@@ -10,6 +10,14 @@
 {
     <p>
         <a class="btn btn-primary" href="/Planes/Create">Dodaj nowy przelot</a>
+
+        @using (Html.BeginForm("Index", "Planes", FormMethod.Get))
+        {
+        <p>
+            Nazwa: @Html.TextBox("searchName") <br/>
+            <input type="submit" value="Szukaj" />
+        </p>
+        } 
     </p>
 }
 <table class="table">

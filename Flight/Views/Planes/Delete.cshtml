@@ -6,7 +6,7 @@
 
 <h2>Usuwanie samolotu</h2>
 
-@if(ViewBag.Error = true)
+@if(ViewBag.Error == true)
 {
     <div class="altert alert-danger" role="alert">
     Wystąpił błąd podczas usuwania.<br/>
@@ -40,8 +40,15 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Usuń" class="btn btn-danger" onclick="returnconfirm('Czy na pewno chcesz usunąć samolot?')"/> 
+            <input type="submit" value="Usuń" class="btn btn-danger" confirmation"/> 
             @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-primary" })
         </div>
     }
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $('.confirmation').on('click', function () {
+            return confirm('Czy na pewno chcesz usunąć samolot?');
+        } );
+    </script>
+    }

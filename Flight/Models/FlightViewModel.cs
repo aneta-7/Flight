@@ -14,30 +14,42 @@ namespace Flights.Models
         public int ID { get; set; }
 
         [Display(Name = "Kod lotu")]
+        [Required(ErrorMessage = "Kod jest wymagany")]
         public string Code { get; set; }
 
         [Display(Name = "Miejsce staru")]
         [MaxLength(40)]
+        [Required(ErrorMessage = "Miejsce wylotu jest wymagane")]
         public string Start { get; set; }
 
         [Display(Name = "Data startu")]
+        [Required(ErrorMessage = "Data wylotu jest wymagana")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date1 { get; set; }
 
         [Display(Name = "Godzina startu")]
+        [Required(ErrorMessage = "Godzina wylotu jest wymagana")]
         public string Time1 { get; set; }
 
         [Display(Name = "Miejsce lądowania")]
+        [Required(ErrorMessage = "Miejsce przylotu jest wymagane")]
         public string Meta { get; set; }
 
         [Display(Name = "Data lądowania")]
+        [Required(ErrorMessage = "Data przylotu jest wymagana")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date2 { get; set; }
 
         [Display(Name = "Godzina lądowania")]
+        [Required(ErrorMessage = "Godzina przylotu jest wymagana")]
         public string Time2 { get; set; }
 
         [Display(Name = "Samolot")]
+       
         public List<Plane> Planes { get; set; }
 
         public int SelectedPlaneID { get; set; }
+
+       
     }
 }

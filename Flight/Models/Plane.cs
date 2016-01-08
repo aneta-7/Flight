@@ -14,12 +14,12 @@ namespace Planes.Models
 
         [Display(Name = "Nazwa")]
         [MaxLength(60)]
-        [Required]
+        [Required(ErrorMessage = "Nazwa jest wymagana")]
         public string Name { get; set; }
 
         [Display(Name = "Typ")]
         [MaxLength(80)]
-        [Required]
+        [Required(ErrorMessage = "Typ jest wymagany")]
         public string Type { get; set; }
 
     }

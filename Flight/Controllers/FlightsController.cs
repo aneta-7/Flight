@@ -11,19 +11,20 @@ using Flights.Models;
 
 namespace Planes.Controllers
 {
+    [RoutePrefix("Flights")]
     public class FlightsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Flights
+        [Route]
         public ActionResult Index()
         {
-          
-
             return View(db.Flights.ToList());
         }
 
         // GET: Flights/Details/5
+        [Route("{id}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,7 +60,6 @@ namespace Planes.Controllers
             {
                 Flight flight = new Flight()
                 {
-                  
                     Code = flightViewModel.Code,
                     Start = flightViewModel.Start,
                     Date1 = flightViewModel.Date1,
@@ -79,6 +79,7 @@ namespace Planes.Controllers
 
         // GET: Flights/Edit/5
         [Authorize]
+        [Route("{id}/edit")]
         public ActionResult Edit(int? id)
         {
             Flight flight = db.Flights.Find(id);
