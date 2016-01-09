@@ -1,4 +1,5 @@
-﻿using Planes.Models;
+﻿using Flights.Validations;
+using Planes.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,11 +25,12 @@ namespace Flights.Models
 
         [Display(Name = "Data startu")]
         [Required(ErrorMessage = "Data wylotu jest wymagana")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [CustomValidation(typeof(DateTimeCheck), "dateValidation")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}", NullDisplayText = "#232")]
         public DateTime Date1 { get; set; }
 
         [Display(Name = "Godzina startu")]
-        [Required(ErrorMessage = "Godzina wylotu jest wymagana")]
+        [Required]
         public string Time1 { get; set; }
 
         [Display(Name = "Miejsce lądowania")]
@@ -36,7 +38,8 @@ namespace Flights.Models
         public string Meta { get; set; }
 
         [Display(Name = "Data lądowania")]
-        [Required(ErrorMessage = "Data przylotu jest wymagana")]
+        [Required]
+        [CustomValidation(typeof(DateTimeCheck), "dateValidation")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date2 { get; set; }
 
@@ -50,6 +53,7 @@ namespace Flights.Models
 
         public int SelectedPlaneID { get; set; }
 
-       
+
+      
     }
 }
