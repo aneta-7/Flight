@@ -7,13 +7,13 @@ namespace Flights.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class delete_walidations : IMigrationMetadata
+    public sealed partial class adding_user_table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(delete_walidations));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(adding_user_table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601061824367_delete_walidations"; }
+            get { return "201601101335286_adding_user_table"; }
         }
         
         string IMigrationMetadata.Source

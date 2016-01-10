@@ -185,21 +185,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601051845158_initial.cs" />
-    <Compile Include="Migrations\201601051845158_initial.Designer.cs">
-      <DependentUpon>201601051845158_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061050214_next.cs" />
-    <Compile Include="Migrations\201601061050214_next.Designer.cs">
-      <DependentUpon>201601061050214_next.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061809232_add_validations.cs" />
-    <Compile Include="Migrations\201601061809232_add_validations.Designer.cs">
-      <DependentUpon>201601061809232_add_validations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061824367_delete_walidations.cs" />
-    <Compile Include="Migrations\201601061824367_delete_walidations.Designer.cs">
-      <DependentUpon>201601061824367_delete_walidations.cs</DependentUpon>
+    <Compile Include="Migrations\201601101335286_adding_user_table.cs" />
+    <Compile Include="Migrations\201601101335286_adding_user_table.Designer.cs">
+      <DependentUpon>201601101335286_adding_user_table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -222,6 +210,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\flights-planes.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -278,6 +267,8 @@
     <Content Include="Views\Flights\Details.cshtml" />
     <Content Include="Views\Flights\Edit.cshtml" />
     <Content Include="Views\Flights\Index.cshtml" />
+    <Content Include="Views\Planes\_PartialView.cshtml" />
+    <Content Include="Views\Flights\_PartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -291,17 +282,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601051845158_initial.resx">
-      <DependentUpon>201601051845158_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061050214_next.resx">
-      <DependentUpon>201601061050214_next.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061809232_add_validations.resx">
-      <DependentUpon>201601061809232_add_validations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061824367_delete_walidations.resx">
-      <DependentUpon>201601061824367_delete_walidations.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601101335286_adding_user_table.resx">
+      <DependentUpon>201601101335286_adding_user_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,50 +10,15 @@
 {
     <p>
         <a class="btn btn-primary" href="/Planes/Create">Dodaj nowy przelot</a>
-}
-        @using (Html.BeginForm("Index", "Planes", FormMethod.Get))
-        {
-        <p>
-            Nazwa: @Html.TextBox("searchName") <br/>
-            <input type="submit" value="Szukaj" />
-        </p>
-        } 
-    </p>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
       
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }, new { @class = "btn btn-warning" })
-
-            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
-            {
-                <br />
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
-            }
-            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin"))){ 
-            <br />
-            @Html.ActionLink("Usuń", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
-            }
-        </td>
-    </tr>
+    </p>
 }
-
-</table>
+@using (Html.BeginForm("Index", "Planes", FormMethod.Get))
+{
+<p>
+    Nazwa: @Html.TextBox("searchName") <br/>
+    <input type="submit" value="Szukaj" />
+</p>
+    @Html.Partial("_PartialView", Model);
+} 
+   

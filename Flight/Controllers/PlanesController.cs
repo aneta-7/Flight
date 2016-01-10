@@ -41,7 +41,8 @@ namespace Planes.Controllers
             Plane plane = db.Planes.Find(id);
             if (plane == null)
             {
-                return HttpNotFound();
+                //  return HttpNotFound();
+                return Content("Brak strony");
             }
             return View(plane);
         }
@@ -77,12 +78,16 @@ namespace Planes.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //   return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Content("Brak strony");
+
             }
             Plane plane = db.Planes.Find(id);
             if (plane == null)
             {
-                return HttpNotFound();
+                // return HttpNotFound();
+                return Content("Brak strony");
+                
             }
             return View(plane);
         }
@@ -115,11 +120,13 @@ namespace Planes.Controllers
             Plane plane = db.Planes.Find(id);
             if (plane == null)
             {
-                return HttpNotFound();
+                //  return HttpNotFound();
+                return Content("Brak strony");
             }
             else if (!User.IsInRole("Admin"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //   return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Content("Brak uprawnień");
             }
             if (error != null)
                 ViewBag.Error = true;

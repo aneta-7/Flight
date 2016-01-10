@@ -27,6 +27,7 @@ namespace Planes.Controllers
         [Route("{id}")]
         public ActionResult Details(int? id)
         {
+         
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -34,7 +35,8 @@ namespace Planes.Controllers
             Flight flight = db.Flights.Find(id);
             if (flight == null)
             {
-                return HttpNotFound();
+                // return HttpNotFound();
+                return Content("Brak strony");
             }
             return View(flight);
         }
@@ -97,7 +99,8 @@ namespace Planes.Controllers
 
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //   return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Content("Brak strony");
             }
            
             if (flightViewModel == null)
@@ -140,7 +143,8 @@ namespace Planes.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Content("Brak strony");
             }
             Flight flight = db.Flights.Find(id);
             if (flight == null)
@@ -149,7 +153,8 @@ namespace Planes.Controllers
             }
             else if (!User.IsInRole("Admin")) 
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Content("Brak uprawnień");
             }
             if (error != null)
                 ViewBag.Error = true;

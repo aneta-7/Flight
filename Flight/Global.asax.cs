@@ -18,6 +18,20 @@ namespace Flights
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Application["LiveSessionsCount"] = 0;
+
+        }
+        protected void Session_Start()
+        {
+            Application["LiveSessionsCount"] = ((int)Application["LiveSessionsCount"]) + 1;
+
+
+        }
+
+        protected void Session_End()
+        {
+            Application["LiveSessionsCount"] = ((int)Application["LiveSessionsCount"]) - 1;
         }
     }
 }

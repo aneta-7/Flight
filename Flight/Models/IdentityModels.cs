@@ -21,5 +21,6 @@ namespace Flights.Models
 
         public DbSet<Plane> Planes { get; set; }
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

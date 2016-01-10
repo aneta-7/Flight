@@ -29,7 +29,7 @@
     </dl>
 </div>
 <p>
-    @if (User.Identity.IsAuthenticated || User.IsInRole("Admin") || User.IsInRole("Pracownik"))
+    @if (User.Identity.IsAuthenticated &&( User.IsInRole("Admin") || User.IsInRole("Pracownik")))
     {
         @Html.ActionLink("Edytuj", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })
     }
