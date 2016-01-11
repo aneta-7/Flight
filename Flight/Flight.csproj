@@ -283,6 +283,7 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Shared\_PaginationPlane.cshtml" />
     <Content Include="Views\Shared\_PaginationFlight.cshtml" />
+    <Content Include="Views\Shared\_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
