@@ -25,12 +25,13 @@ namespace Flights.Models
 
         [Display(Name = "Data startu")]
         [Required(ErrorMessage = "Data wylotu jest wymagana")]
-        [CustomValidation(typeof(DateTimeCheck), "dateValidation")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}", NullDisplayText = "#232")]
-        public DateTime Date1 { get; set; }
+        //   [CustomValidation(typeof(DateTimeCheck), "dateValidation")]
+        [DataType(DataType.Date)]
+      //  [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}", NullDisplayText = "#232")]
+        public Nullable<DateTime> Date1 { get; set; }
 
         [Display(Name = "Godzina startu")]
-        [Required]
+        [Required(ErrorMessage = "Godzina startu jest wymagana")]
         public string Time1 { get; set; }
 
         [Display(Name = "Miejsce lądowania")]
@@ -38,17 +39,16 @@ namespace Flights.Models
         public string Meta { get; set; }
 
         [Display(Name = "Data lądowania")]
-        [Required]
-        [CustomValidation(typeof(DateTimeCheck), "dateValidation")]
+        [Required(ErrorMessage = "Data przylotu jest wymagana")]
+        [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime Date2 { get; set; }
+        public Nullable<DateTime> Date2 { get; set; }
 
         [Display(Name = "Godzina lądowania")]
         [Required(ErrorMessage = "Godzina przylotu jest wymagana")]
         public string Time2 { get; set; }
 
-        [Display(Name = "Samolot")]
-       
+        [Display(Name = "Samolot")]  
         public List<Plane> Planes { get; set; }
 
         public int SelectedPlaneID { get; set; }

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Planes.Models.Flight>
 
+
 @{
     ViewBag.Tytul = "Lista przelotów";
 }
@@ -12,4 +13,82 @@
 </p>
 }
 
-@Html.Partial("_PartialView", Model);
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Date1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Time1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Meta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Date2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Time2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Plane)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plane.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }, new { @class = "btn btn-warning" })
+
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                {
+                    <br />
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
+                }
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+                {
+                    <br />
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+@Html.Partial("_PaginationFlight", Model)

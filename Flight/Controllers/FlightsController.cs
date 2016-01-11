@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Planes.Models;
 using Flights.Models;
+using PagedList;
 
 namespace Planes.Controllers
 {
@@ -18,9 +19,20 @@ namespace Planes.Controllers
 
         // GET: Flights
         [Route]
-        public ActionResult Index()
+        public ActionResult Index( int? page)
         {
-            return View(db.Flights.ToList());
+            var style = db.Flights.OrderBy(s => s.Start);
+            if(Request.HttpMethod != "GET")
+            {
+                page = 1;
+            }
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(style.ToPagedList(pageNumber, pageSize));
+
+
+            //  return View(db.Flights.ToList());
         }
 
         // GET: Flights/Details/5

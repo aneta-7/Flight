@@ -23,7 +23,7 @@ namespace Planes.Models
 
         [Display(Name = "Data startu" )]
         [Required]
-        public DateTime Date1 { get; set; }
+        public Nullable<DateTime> Date1 { get; set; }
 
         [Display(Name = "Godzina startu")]
         [Required]
@@ -35,7 +35,7 @@ namespace Planes.Models
 
         [Display(Name = "Data lądowania")]
         [Required]
-        public DateTime Date2 { get; set; }
+        public Nullable<DateTime> Date2 { get; set; }
 
         [Display(Name = "Godzina lądowania")]
         [Required]

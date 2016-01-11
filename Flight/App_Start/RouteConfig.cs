@@ -18,6 +18,13 @@ namespace Flights
                 url: "loty/{action}/{id}",
                 defaults: new { controller = "Flights", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Plane",
+                url: "samoloty/{action}/{id}",
+                defaults: new { controller = "Planes", action = "Index", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

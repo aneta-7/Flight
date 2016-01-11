@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Planes.Models;
 using Flights.Models;
+using PagedList;
 
 namespace Planes.Controllers
 {
@@ -16,8 +17,16 @@ namespace Planes.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Planes
-        public ActionResult Index(string searchName)
+        public ActionResult Index(string searchName, int? page)
         {
+            var style = db.Planes.OrderBy(s => s.Name);
+            if (Request.HttpMethod != "GET")
+            {
+                page = 1;
+            }
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
             var planes = from p in db.Planes
                          select p;
 
@@ -25,8 +34,8 @@ namespace Planes.Controllers
             {
                 planes = planes.Where(s => s.Name.Contains(searchName));
             }
-
-            return View(planes);
+            return View(style.ToPagedList(pageNumber, pageSize));
+            // return View(planes);
 
             //   return View(db.Planes.ToList());
         }
