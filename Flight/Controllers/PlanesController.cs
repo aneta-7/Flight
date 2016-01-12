@@ -17,28 +17,54 @@ namespace Planes.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Planes
-        public ActionResult Index(string searchName, int? page)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchName, int? page)
         {
-            var style = db.Planes.OrderBy(s => s.Name);
-            if (Request.HttpMethod != "GET")
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+
+            if (searchName != null)
             {
                 page = 1;
+            }
+            else
+            {
+                searchName = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchName;
+
+            var planes = from p in db.Planes
+                           select p;
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                planes = planes.Where(s => s.Name.Contains(searchName)
+                                       || s.Type.Contains(searchName));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    planes = planes.OrderByDescending(s => s.Name);
+                    break;
+                case "Type":
+                    planes = planes.OrderBy(s => s.Type);
+                    break;
+                case "type_desc":
+                    planes = planes.OrderByDescending(s => s.Type);
+                    break;
+                default:  // Name ascending 
+                    planes = planes.OrderBy(s => s.Name);
+                    break;
             }
 
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            var planes = from p in db.Planes
-                         select p;
-
-            if (!String.IsNullOrEmpty(searchName))
-            {
-                planes = planes.Where(s => s.Name.Contains(searchName));
-            }
-            return View(style.ToPagedList(pageNumber, pageSize));
-            // return View(planes);
-
-            //   return View(db.Planes.ToList());
+            return View(planes.ToPagedList(pageNumber, pageSize));
         }
+        // return View(planes);
+
+        //   return View(db.Planes.ToList());
+
 
         // GET: Planes/Details/5
         public ActionResult Details(int? id)
