@@ -21,7 +21,7 @@ namespace Planes.Controllers
         [Route]
         public ActionResult Index( int? page)
         {
-            var style = db.Flights.OrderBy(s => s.Start);
+            var flight = db.Flights.OrderBy(s => s.Start);
             if(Request.HttpMethod != "GET")
             {
                 page = 1;
@@ -29,10 +29,14 @@ namespace Planes.Controllers
 
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            return View(style.ToPagedList(pageNumber, pageSize));
+            return View(flight.ToPagedList(pageNumber, pageSize));
 
 
             //  return View(db.Flights.ToList());
+        }
+        public JsonResult IndexPost(Models.Flight myDate)
+        {
+            return Json(new { Result = "OK" });
         }
 
         // GET: Flights/Details/5

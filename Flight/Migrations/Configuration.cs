@@ -53,14 +53,6 @@ namespace Flights.Migrations
             var store = new UserStore<User>(context);
             var manager = new UserManager<User>(store);
 
-            if (!context.Users.Any(u => u.UserName == "Admin"))
-            {
-                var user = new User { UserName = "admin@admin.pl" };
-                var adminresult = manager.Create(user, "12345678");
-
-                if (adminresult.Succeeded)
-                    manager.AddToRole(user.Id, "Admin");
-            }
 
             if (!context.Users.Any(u => u.UserName == "Marek"))
             {

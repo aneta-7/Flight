@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
 namespace Flights.Validations
 {
-    public class DateTimeCheck
+    public class DateTimeCheck:ValidationAttribute
     {
-        public static ValidationResult dateValidation(DateTime dateTime, ValidationContext validationContext)
-        {       
-            DateTime minDate = DateTime.Parse("01/01/2000");
-            DateTime maxDate = DateTime.Parse("01/01/2020");
-
-
-            if (dateTime>=minDate && dateTime <= maxDate)
-                 return new ValidationResult("Data musi być z zakresu 01/01/2000 - 01/01/2020");
-            else return ValidationResult.Success;
-
-
+        public static ValidationResult TimeValidation(object value, ValidationContext validationContext)
+        {
+            DateTime dt;
+            if (DateTime.TryParseExact((string)value, new[] { "hh:mm tt", "h:mm tt" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                return ValidationResult.Success;
+            else
+                return new ValidationResult("Correct time formats: 01:00 AM or 1:00 AM");
         }
-
     }
 }

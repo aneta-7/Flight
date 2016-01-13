@@ -42,6 +42,7 @@ namespace Planes.Models
         public string Time2 { get; set; }
 
         [Display(Name = "Samolot")]
+
         public virtual Plane Plane { get; set; }
 
     }
