@@ -32,6 +32,7 @@ namespace Flights.Models
 
         [Display(Name = "Godzina startu")]
         [Required(ErrorMessage = "Godzina startu jest wymagana")]
+        [DateTimeCheck]
         public string Time1 { get; set; }
 
         [Display(Name = "Miejsce lądowania")]
@@ -46,6 +47,7 @@ namespace Flights.Models
 
         [Display(Name = "Godzina lądowania")]
         [Required(ErrorMessage = "Godzina przylotu jest wymagana")]
+        [DateTimeCheck]
         public string Time2 { get; set; }
 
         [Display(Name = "Samolot")]  

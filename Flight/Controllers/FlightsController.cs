@@ -34,10 +34,29 @@ namespace Planes.Controllers
 
             //  return View(db.Flights.ToList());
         }
-        public JsonResult IndexPost(Models.Flight myDate)
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Index(FlightViewModel model)
         {
-            return Json(new { Result = "OK" });
+            if (ModelState.IsValid)
+            {
+                ViewBag.Code = model.Code;
+                ViewBag.Start = model.Start;
+                ViewBag.Date1 = model.Date1;
+                ViewBag.Time1 = model.Time1;
+                ViewBag.Meta = model.Meta;
+                ViewBag.Date2 = model.Date2;
+                ViewBag.Time2 = model.Date2;
+                ViewBag.Plane = db.Planes.Find(model.SelectedPlaneID);
+            }
+            return View(model);
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
 
         // GET: Flights/Details/5
         [Route("{id}")]
