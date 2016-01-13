@@ -16,18 +16,18 @@ namespace Flights.Validations
             {
                 string email = value.ToString();
 
-                if (Regex.IsMatch(email, @"^(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$", RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(email, @"(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]", RegexOptions.IgnoreCase))
                 {
                     return ValidationResult.Success;
                 }
                 else
                 {
-                    return new ValidationResult("Please Enter a Valid Email.");
+                    return new ValidationResult("Proszę wprowadzić datę w formacie hh:mm");
                 }
             }
             else
             {
-                return new ValidationResult("" + validationContext.DisplayName + " is required");
+                return new ValidationResult("" + validationContext.DisplayName + " jest wymagana");
             }
         }
     }
