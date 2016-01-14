@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Planes.Models.Plane>
-
+﻿@model PagedList.IPagedList<Planes.Models.Plane>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Tytul = "Lista samolotów";
 }
@@ -13,21 +14,22 @@
       
     </p>
 }
+
 @using (Html.BeginForm("Index", "Planes", FormMethod.Get))
 {
 <p>
-    Nazwa/Typ: @Html.TextBox("searchName") <br/>
+    Nazwa/Typ: @Html.TextBox("searchName", ViewBag.CurrentFilter as string) <br/>
     <input type="submit" value="Szukaj" />
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Type)
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
 
+        <th>
+            @Html.ActionLink("Typ", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
         <th></th>
     </tr>
 
@@ -58,7 +60,12 @@
     }
 
 </table>
+}
 
-    @Html.Partial("_PaginationPlane", Model);
-} 
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+ 
    

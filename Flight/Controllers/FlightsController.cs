@@ -152,7 +152,7 @@ namespace Planes.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Code,Start,Date1,Time1,Meta,Date2,Time2,SelectedPlaneId, Planes")] FlightViewModel flightViewModel)
+        public ActionResult Edit([Bind(Include = "ID,Code,Start,Date1,Time1,Meta,Date2,Time2,SelectedPlaneId")] FlightViewModel flightViewModel)
         {
            
             if (ModelState.IsValid)
@@ -170,6 +170,7 @@ namespace Planes.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            flightViewModel.Planes = db.Planes.ToList();
             return View(flightViewModel);
         }
 
