@@ -21,6 +21,7 @@ namespace Planes.Controllers
         [Route]
         public ActionResult Index( int? page)
         {
+       //     var flight = db.Flights;
             var flight = db.Flights.OrderBy(s => s.Start);
             if(Request.HttpMethod != "GET")
             {

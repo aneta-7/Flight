@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Planes.Models;
 using Flights.Models;
 using PagedList;
+using System.Globalization;
 
 namespace Planes.Controllers
 {
@@ -16,9 +17,13 @@ namespace Planes.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Planes
-        public ViewResult Index(string sortOrder, string currentFilter, string searchName, int? page)
+
+
+
+// GET: Planes
+public ViewResult Index(string sortOrder, string currentFilter, string searchName, int? page)
         {
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Type" ? "type_desc" : "Type";
@@ -34,12 +39,11 @@ namespace Planes.Controllers
 
             ViewBag.CurrentFilter = searchName;
 
-            var planes = from p in db.Planes
-                           select p;
+            var planes = db.Planes.OrderBy(s => s.Name);
             if (!String.IsNullOrEmpty(searchName))
             {
                 planes = planes.Where(s => s.Name.Contains(searchName)
-                                       || s.Type.Contains(searchName));
+                                       || s.Type.Contains(searchName)).OrderBy(s => s.Name);
             }
             switch (sortOrder)
             {
@@ -67,7 +71,7 @@ namespace Planes.Controllers
 
 
         // GET: Planes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string meta)
         {
             if (id == null)
             {
@@ -79,6 +83,25 @@ namespace Planes.Controllers
                 //  return HttpNotFound();
                 return Content("Brak strony");
             }
+
+            using (var context = new ApplicationDbContext()) {
+                var count = (from pl in db.Planes
+                             join flight in db.Flights on pl.ID equals flight.Plane.ID
+                             where pl.ID == id
+                             select (pl)).Count();
+
+                ViewBag.Count = count;
+                var query = 0.0;
+                if (count != 0)
+                {
+                    query = db.Flights.Join(db.Planes, a => a.Plane.ID, b => b.ID, (a, b) => new { A = a, B = b }).
+                        Where(compare => compare.B.ID == id).ToList().
+                        Select(x => (Convert.ToDateTime(x.A.Time2) - Convert.ToDateTime(x.A.Time1)).TotalMinutes).Average();
+                }
+
+                ViewBag.AVG = query;
+            }
+
             return View(plane);
         }
 
@@ -195,5 +218,8 @@ namespace Planes.Controllers
             }
             base.Dispose(disposing);
         }
+
+     
+
     }
 }
